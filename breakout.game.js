@@ -10,7 +10,7 @@
             radius: 20
         };
         this.paddle = {
-            width: 75,
+            width: 105,
             height: 10,
             step: 8,
             leftControlPressed: false,
@@ -30,8 +30,16 @@
                 this.dx = -this.dx;
             }
 
-            if (this.y + this.dy > this.canvas.height - this.ball.radius || this.y + this.dy < this.ball.radius) {
+            if (this.y + this.dy < this.ball.radius) {
                 this.dy = -this.dy;
+            } else if (this.y + this.dy > this.canvas.height - this.ball.radius) {
+                if(this.x > this.paddle.x && this.x < this.paddle.x + this.paddle.width) {
+                    this.dy = -this.dy;
+                }
+                else {
+                    alert('Game Over');
+                    document.location.reload();
+                }
             }
 
             this.x += this.dx;
